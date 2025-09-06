@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>مولد Meta Description</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+      background: #f9f9f9;
+    }
+    textarea {
+      width: 90%;
+      height: 100px;
+      margin-bottom: 20px;
+      padding: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 10px;
+      background: #eee;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h2>مولد وصف SEO (Meta Description)</h2>
+  <p>اكتب أي نص أو وصف، والأداة تعطيك نسخة جاهزة للسيو ✨</p>
+
+  <textarea id="inputText" placeholder="اكتب النص هنا..."></textarea><br>
+  <button onclick="generateDescription()">توليد الوصف</button>
+
+  <div id="result"></div>
+
+  <script>
+    function generateDescription() {
+      let text = document.getElementById("inputText").value;
+      if (text.length === 0) {
+        document.getElementById("result").innerHTML = "⚠️ رجاءً اكتب نص أولاً.";
+        return;
+      }
+      // ناخذ أول 150 حرف (المناسب لوصف السيو)
+      let meta = text.substring(0, 150);
+      document.getElementById("result").innerHTML = 
+        "📌 وصفك الجاهز:<br><b>" + meta + "...</b>";
+    }
+  </script>
+</body>
+</html>
