@@ -5,75 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>مباريات اليوم</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f9;
-      text-align: center;
-      direction: rtl;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background: #2d89ef;
-      color: white;
-      padding: 15px;
-      font-size: 22px;
-      font-weight: bold;
-    }
-    table {
-      margin: 20px auto;
-      border-collapse: collapse;
-      width: 90%;
-      background: white;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 12px;
-      font-size: 16px;
-    }
-    th {
-      background: #2d89ef;
-      color: white;
-    }
-    tr:nth-child(even) {
-      background: #f9f9f9;
-    }
-    .time {
-      color: #444;
-      font-weight: bold;
-    }
+    body {font-family: Arial, sans-serif; background:#f4f6f9; margin:0; padding:0;}
+    header {background:#2196F3; color:white; text-align:center; padding:15px; font-size:22px;}
+    table {width:95%; margin:20px auto; border-collapse:collapse; background:white; box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+    th, td {border:1px solid #ddd; padding:10px; text-align:center;}
+    th {background:#2196F3; color:white;}
+    .team {display:flex; align-items:center; justify-content:center; gap:6px;}
+    .team img {width:24px; height:24px; border-radius:50%;}
   </style>
 </head>
 <body>
+
   <header>⚽ مباريات اليوم</header>
 
-  <table>
+  <table id="matches">
     <tr>
-      <th>المباراة</th>
-      <th>الوقت</th>
-      <th>البطولة</th>
-    </tr>
-    <tr>
-      <td>برشلونة × ريال مدريد</td>
-      <td class="time">22:00</td>
-      <td>الدوري الإسباني</td>
-    </tr>
-    <tr>
-      <td>ليفربول × مانشستر سيتي</td>
-      <td class="time">19:30</td>
-      <td>الدوري الإنجليزي</td>
-    </tr>
-    <tr>
-      <td>الزمالك × الأهلي</td>
-      <td class="time">21:00</td>
-      <td>الدوري المصري</td>
-    </tr>
-    <tr>
-      <td>الهلال × النصر</td>
-      <td class="time">20:45</td>
-      <td>دوري روشن السعودي</td>
+      <th>المباراة</th><th>الوقت</th><th>البطولة</th><th>النتيجة</th><th>الشعار</th>
     </tr>
   </table>
+
+  <script>
+    const sheetUrl = "https://docs.google.com/spreadsheets/d/1-7XQD5oEBzIvuBo1WG6ntMOq_vwnaUWyf21V3Plhds8/gviz/tq?tqx=out:csv";
+    const table = document.getElementById("matches");
+
+    fetch(sheetUrl)
+      .then(res => res.text())
+      .then(data => {
+        const rows = data.split("\n").slice(1);
+        rows.forEach(r => {
+          const cols = r.split(",");
+          if (cols.length < 5) return;
+          const [match, time, league, score, logo] = cols;
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${match}</td>
+            <td>${time}</td>
+            <td>${league}</td>
+            <td>${score}</td>
+            <td><img src="${logo}" width="30"></td>
+          `;
+          table.appendChild(tr);
+        });
+      })
+      .catch(err => console.error("خطأ في جلب البيانات:", err));
+  </script>
+
 </body>
 </html>
