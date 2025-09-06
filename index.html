@@ -1,78 +1,79 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>مولد وصف ميتا</title>
+  <title>مباريات اليوم</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background: #f4f4f9;
       text-align: center;
-      padding: 50px;
+      direction: rtl;
+      margin: 0;
+      padding: 0;
     }
-    h1 {
-      color: #333;
-    }
-    textarea {
-      width: 90%;
-      height: 100px;
-      margin-bottom: 20px;
-      padding: 10px;
-      font-size: 16px;
-    }
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background: #4CAF50;
+    header {
+      background: #2d89ef;
       color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #45a049;
-    }
-    .output {
-      margin-top: 20px;
       padding: 15px;
-      background: #fff;
+      font-size: 22px;
+      font-weight: bold;
+    }
+    table {
+      margin: 20px auto;
+      border-collapse: collapse;
+      width: 90%;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    th, td {
       border: 1px solid #ddd;
-      border-radius: 5px;
-      display: none;
+      padding: 12px;
+      font-size: 16px;
+    }
+    th {
+      background: #2d89ef;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+    .time {
+      color: #444;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <h1>مولد SEO (Meta Description)</h1>
-  <p>✨ اكتب أي نص أو وصف، والأداة تعطيك نسخة جاهزة للسيو</p>
-  <textarea id="inputText" placeholder="اكتب وصفك هنا..."></textarea>
-  <br>
-  <button onclick="generateDescription()">توليد الوصف</button>
+  <header>⚽ مباريات اليوم</header>
 
-  <div class="output" id="outputBox">
-    <strong>وصفك الجاهز 📌:</strong>
-    <p id="outputText"></p>
-  </div>
-
-  <script>
-    function generateDescription() {
-      const input = document.getElementById("inputText").value.trim();
-      const outputBox = document.getElementById("outputBox");
-      const outputText = document.getElementById("outputText");
-
-      if (input === "") {
-        alert("⚠️ رجاءً اكتب نص أولاً!");
-        return;
-      }
-
-      // نجهز الوصف مع حدود 160 حرف تقريباً
-      let description = input.substring(0, 157);
-      if (input.length > 157) description += "...";
-
-      outputText.textContent = description;
-      outputBox.style.display = "block";
-    }
-  </script>
+  <table>
+    <tr>
+      <th>المباراة</th>
+      <th>الوقت</th>
+      <th>البطولة</th>
+    </tr>
+    <tr>
+      <td>برشلونة × ريال مدريد</td>
+      <td class="time">22:00</td>
+      <td>الدوري الإسباني</td>
+    </tr>
+    <tr>
+      <td>ليفربول × مانشستر سيتي</td>
+      <td class="time">19:30</td>
+      <td>الدوري الإنجليزي</td>
+    </tr>
+    <tr>
+      <td>الزمالك × الأهلي</td>
+      <td class="time">21:00</td>
+      <td>الدوري المصري</td>
+    </tr>
+    <tr>
+      <td>الهلال × النصر</td>
+      <td class="time">20:45</td>
+      <td>دوري روشن السعودي</td>
+    </tr>
+  </table>
 </body>
 </html>
